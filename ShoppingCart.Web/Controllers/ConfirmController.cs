@@ -20,7 +20,7 @@ namespace ShoppingCart.Web.Controllers
         OrderHistoryBO objOrderHistoryBO = new OrderHistoryBO();
 
         //
-        // GET: /Confirm/
+        // GET: /Confirm/dd
         public ActionResult PlaceOrder()
         {
             return View();
