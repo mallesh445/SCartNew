@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ShoppingCart.Web.ProductImage>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="panel-body">
+    <h2>Product Images </h2>
+
+    <p>
+        @Html.ActionLink("Add Product Image", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Product.ProductName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.ProductName)
+                </td>
+                <td>
+                    <img src="@item.ImagePath" alt="loading...." style="max-height:150px;max-width:120px" />
+                    <br />
+                    <p>@item.ImageName.Split('.')[0].ToString()</p>
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PKImageId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PKImageId })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <p>
+        @Html.ActionLink("Back to List", "Index", "Product")
+    </p>
+    </div>

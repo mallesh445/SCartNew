@@ -1,0 +1,26 @@
+﻿@model String
+
+<div>
+    <ol class="breadcrumb">
+        @if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
+        {
+            <li>
+                @Html.ActionLink("Home", "Index", "Home")
+            </li>
+            <li>
+                @Html.ActionLink(ViewContext.RouteData.Values["controller"].ToString(), "Index")
+            </li>
+            <li class="active">
+                @Html.ActionLink(@Model, ViewContext.RouteData.Values["action"].ToString())
+                @*@Html.ActionLink(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString())*@
+            </li>
+        }
+        else
+        {
+            <li class="active">
+                @Html.ActionLink("Home", "Index", "Home")
+            </li>
+        }
+
+    </ol>
+</div>

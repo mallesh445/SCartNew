@@ -1,0 +1,138 @@
+﻿@model IEnumerable<ShoppingCart.Web.Product>
+
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>List</h2>
+<head>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet"
+          href="https://cdn.datatables.net/plug-ins/9dcbecd42ad/integration/jqueryui/dataTables.jqueryui.css">
+</head>
+<div class="panel-body">
+    <table class="table table-condensed table-striped table-hover" id="table_id">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SubCategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedByUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedByUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            @*<th>ProductImage</th>*@
+            <th>Action</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubCategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedByUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedByUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                @*<td>
+                        <a href="@Url.Action("Index", "ProductImage", new {id=item.PKProductId })">GetProductImage</a>
+                    </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PKProductId })
+                </td>
+                @*<td>
+                        @Html.ActionLink("Details", "Details", new { id = item.PKProductId })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.PKProductId })
+                    </td>*@
+            </tr>
+        }
+
+    </table>
+    <table class="table table-condensed table-striped table-hover" id="nnnn1">
+
+    </table>
+
+</div>
+<script type="text/javascript">
+    var data = [
+        ["Row 1 - Field 1", "Row 1 - Field 2", "Row 1- Field 3"],
+        ["Row 2 - Field 1", "Row 2 - Field 2", "Row 2- Field 3"],
+        ["Row 3 - Field 1", "Row 3 - Field 2", "Row 3- Field 3"],
+        ["Row 4 - Field 1", "Row 4 - Field 2", "Row 4- Field 3"],
+        ["Row 5 - Field 1", "Row 5 - Field 2", "Row 5- Field 3"],
+        ["Row 6 - Field 1", "Row 6 - Field 2", "Row 6- Field 3"],
+        ["Row 7 - Field 1", "Row 7 - Field 2", "Row 7- Field 3"],
+    ];
+    console.log(data);
+    var columns = [
+        { "title": "One" },
+        { "title": "Two" },
+        { "title": "Three" }
+    ];
+    $(document).ready(function () {
+        $('#nnnn1').dataTable({
+            data: data,
+            columns: columns,
+            "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]]
+        });
+    });
+</script>

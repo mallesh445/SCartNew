@@ -1,0 +1,125 @@
+﻿@model ShoppingCart.Web.Category
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Add Category</h2>
+
+
+<div class="panel-body">
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#categoryInfo">Category Info</a></li>
+        <li><a data-toggle="tab" href="#productsTab">Products</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="categoryInfo" class="tab-pane fade in active">
+            <div class="panel-body">
+                <h3>CategoryInfo</h3>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="label-wrapper"><label class="control-label" for="Name">Name  </label><i class="fa fa-question-circle"></i></div>
+                        @*<div class="label-wrapper"><label class="control-label" for="Name">Name</label><div title="The category's name." data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div></div>*@
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control text-box single-line" id="newcategoryName" name="newcategoryName" type="text" value="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-6">
+                        <input type="submit" id="btnCatSubmit" value="Create" class="btn btn-success" />
+                    </div>
+                </div>
+                @*@using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            <hr />
+                            @Html.ValidationSummary(true)
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CategoryName, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.CategoryName)
+                                    @Html.ValidationMessageFor(model => model.CategoryName)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.IsActive, new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.IsActive)
+                                    @Html.ValidationMessageFor(model => model.IsActive)
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Create" class="btn btn-default" />
+                                </div>
+                            </div>
+                        </div>
+                    }*@
+            </div>
+        </div>
+        <div id="productsTab" class="tab-pane fade">
+            <div class="panel-body">
+                <h3>Products Associated</h3>
+                <p>Select to add under this category.</p>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+    <div><span></span>
+        <button class="btn btn-primary" onclick="@Html.ActionLink("Back to List", "Index")">Back</button>
+    </div>
+</div>
+<input type="submit" id="btnSubmict" value="Add Category" />
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(function () {
+                $('#btnCatSubmit').click(function (event) {
+                    event.preventDefault();
+                    var category = {
+                        CategoryName: 'Shashangka'
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: "/Admin/Category/Create",
+                        data: JSON.stringify(category),
+                        dataType: "json",
+                        contentType: 'application/json; charset=utf-8',
+                        success: function (data) {
+                            alert(data.msg);
+                        },
+                        error: function () {
+                            alert("Error occured!!")
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+}
+@*@using (Html.BeginForm())
+    {
+           @Html.AntiForgeryToken()
+
+       @Html.TextBox("CategoryName")
+        <br/>
+        <input type="file" name="image"  />
+         <input type="submit" value="Create" class="btn btn-default" />
+    }*@
+

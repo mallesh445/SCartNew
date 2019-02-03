@@ -1,0 +1,75 @@
+﻿@model ShoppingCart.Web.SubCategory
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="panel-body">
+    <h3>Edit SubCategory - @Html.DisplayTextFor(model => model.SubCategoryName)</h3>
+
+    @using (Html.BeginForm("Edit", "SubCategory", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.PKSubCategoryId)
+            @Html.HiddenFor(model => model.FKCreatedByUserId)
+            @Html.HiddenFor(model => model.FKUpdatedByUserId)
+            @Html.HiddenFor(model => model.CreatedDate)
+            @Html.HiddenFor(model => model.ImageName)
+            @Html.HiddenFor(model => model.ImagePath)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FKCategoryId, "FKCategoryId", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("FKCategoryId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.FKCategoryId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SubCategoryName, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SubCategoryName)
+                    @Html.ValidationMessageFor(model => model.SubCategoryName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImageName, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ImageName)
+                    @Html.ValidationMessageFor(model => model.ImageName)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImagePath, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <img src="@Model.ImagePath" alt="loading...." height="150" width="150" />
+                    <input type="file" name="txtFile" value="" />
+                    @Html.ValidationMessageFor(model => model.ImagePath)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsActive, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.IsActive)
+                    @Html.ValidationMessageFor(model => model.IsActive)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-Primary" />
+                </div>
+            </div>
+        </div>
+    }
+    <hr />
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>

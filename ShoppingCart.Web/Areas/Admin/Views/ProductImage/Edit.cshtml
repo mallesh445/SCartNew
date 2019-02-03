@@ -1,0 +1,33 @@
+﻿@model ShoppingCart.Web.ProductImage
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="panel-body">
+    <h2>Edit - @Html.DisplayTextFor(model => model.Product.ProductName)</h2>
+
+@using (Html.BeginForm("Edit", "ProductImage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>ProductImage</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.PKImageId)
+        @Html.HiddenFor(model => model.FKProductId)
+
+
+        <img src="@Model.ImagePath" alt="loading...." style="max-height:150px;max-width:120px" />
+        <input type="file" name="image" value="" />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index", new { id = Model.FKProductId })
+</div>

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ShoppingCart.Web.ProductImage>
+@{
+    ViewBag.Title = "ProductImages";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+
+<h3></h3>
+<div class="container">
+    <div>
+        <ol class="breadcrumb">
+            @if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
+            {
+                <li>
+                    @Html.ActionLink("Home", "Index", "Home")
+                </li>
+                <li>
+                    @Html.ActionLink(@Model.Select(q=>q.ImageName.Split('.')[0].ToString()).FirstOrDefault(), ViewContext.RouteData.Values["action"].ToString())
+                </li>
+            }
+        </ol>
+    </div>
+    @foreach (var items in Model)
+    {
+        <div class="col-sm-3 img-responsive  product-card">
+            <a href=@Url.Action("GetProductDetails", "Catelog", new { productId = @items.FKProductId,imagePath=@items.ImagePath})>
+                <center>
+                    <img src="@items.ImagePath" alt="Loading.." style="max-height:180px" />
+                    <p>@items.ImageName.Split('.')[0].ToString()</p>
+                </center>
+            </a>
+        </div>
+    }
+
+</div>

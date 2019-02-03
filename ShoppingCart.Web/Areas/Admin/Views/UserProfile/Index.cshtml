@@ -1,0 +1,215 @@
+﻿@model IEnumerable<ShoppingCart.Web.UserProfile>
+@{
+    ViewBag.Title = "UserProfile";
+}
+
+<div class="panel-body">
+    <h2>@ViewBag.Title</h2>
+
+    <p>
+        @Html.ActionLink("Add UserProfile", "Create")
+    </p>
+    @using (Html.BeginForm())
+    {
+        <div>
+            @Html.Label("EmailId")
+            <input type="text" name="txtEmailId" />
+            @Html.Label("PhoneNo")
+            <input type="text" name="txtPhoneNo" />
+            @Html.Label("CreatedDate")
+            <input type="text" name="txtFromDate" class="Date" />
+            @Html.Label("To")
+            <input type="text" name="txtToDate" class="Date" />
+            <input type="submit" name="btnSearch" value="Search" class="btn btn-sm btn-primary" />
+            <input type="submit" name="btnReset" value="Reset" class="btn btn-sm btn-primary" />
+        </div>
+        ;
+        <table class="table table-condensed table-striped table-hover" id="adminUsersTable">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UserName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EmailId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MobileNo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AddressLine1)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AddressLine2)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.City)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.State)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Country)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ZipCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UpdatedDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Role.RoleName)
+                    </th>
+                    <th>
+                        @Html.DisplayName("CreateByUser")
+                    </th>
+                    <th>
+                        @Html.DisplayName("UpdatedByUser")
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                    <th>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmailId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MobileNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AddressLine1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AddressLine2)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ZipCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UpdatedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Role.RoleName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserProfile2.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserProfile3.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsActive)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.PKUserId })
+                        @*|@Html.ActionLink("Details", "Details", new { id = item.PKUserId }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.PKUserId })|
+                            @Html.ActionLink("UserLoginHistory", "UserLoginHistory", new { id = item.PKUserId })
+                            @Html.ActionLink("OrderHistory", "OrderHistory", new { id = item.PKUserId })*@
+                    </td>
+                </tr>
+            }
+        </table>
+
+    }
+</div>
+@section scripts
+{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link href="~/Content/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.Date').datepicker();
+
+
+            $('#adminUsersTable').DataTable({
+                'bSort': true,
+                "autoWidth": true,
+                "scrollX": true,
+                'aoColumns': [
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    { sWidth: "20%", bSearchable: true, bSortable: true },
+                    //match the number of columns here for table1
+                ],
+                "bAutoWidth": false,
+                "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+                "info": true,
+                "paging": true,
+                "fnInitComplete": function () {
+
+                    $("#adminUsersTable").css("width", "100%");
+                }
+            });
+
+            //var oTable = $('#adminUsersTable').dataTable();
+
+            //// Highlight every second row
+            //oTable.$('tr:odd').css('backgroundColor', '#b3c6ff');
+            //oTable.$('thead').css('backgroundColor', '#b3ffb3');
+
+        });
+    </script>
+}

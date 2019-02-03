@@ -1,0 +1,69 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    int quantitesTemp = 0;
+    if (Helper.UserName != null)
+    {
+        HttpCookie CartCookie = Request.Cookies[Helper.UserName];
+        if (CartCookie != null)
+        {
+            foreach (var item in CartCookie.Values)
+            {
+                string cookieValue = Convert.ToString(CartCookie[Convert.ToString(item)]);
+                if (cookieValue != null)
+                {
+                    int qty = int.Parse(@cookieValue.Split('^')[0]);
+                    quantitesTemp = quantitesTemp + qty;
+                }
+            }
+        }
+        string userData = User.Identity.GetUserName();
+    }
+}
+<ul class="nav navbar-nav navbar-right row">
+    @*<li><i class="fas fa-shopping-cart" id="shopCartId" style="color:white"></i></li>*@
+    <li>
+        <a href="@Url.Action("ShowCart","ShoppingCart")">
+            My Cart
+            <i class="fas fa-shopping-cart" style="color:white">
+                <span class="badge badge-primary badge-pill" style="background-color:red">@quantitesTemp</span>
+            </i>
+            @*<span class="badge badge-primary badge-pill">@quantitesTemp</span>*@
+        </a>
+    </li>
+
+    @if (Request.IsAuthenticated)
+    {
+        <li>@Html.ActionLink("MyOrders", "GetOrderDetails", "MyOrder")</li>
+        <li>
+            @Html.ActionLink("Hello " + Helper.UserName + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+            @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+        </li>
+        <li>@Html.ActionLink("LogOut", "SignOut", "Account")</li>
+    }
+    else
+    {
+        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+    }
+    <li></li>
+</ul>
+@*@if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+        }
+    }
+    else
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+    }*@

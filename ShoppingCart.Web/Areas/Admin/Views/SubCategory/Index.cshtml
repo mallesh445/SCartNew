@@ -1,0 +1,164 @@
+﻿@model IEnumerable<ShoppingCart.Web.SubCategory>
+
+<div class="clearfix">
+    <div class="pull-left" style="font-size: 26px;">Sub Categories</div>
+    <div class="pull-right">
+        <a class="btn bg-blue" href="Create"><i class="fa fa-plus-square"></i> Add New</a>
+        <button type="button" class="btn btn-success">
+            <i class="fa fa-download"></i>
+            Export
+        </button>
+    </div>
+</div>
+
+@*<p>@Html.ActionLink("Add SubCategory", "Create")</p>*@
+@*@using (Html.BeginForm())
+    {
+        <div>
+            @Html.Label("Category")
+            @Html.DropDownList("Category", ViewBag.CategoryId as SelectList, " Select Category")
+            <input type="submit" name="btnSearch" value="Search" class="btn btn-sm btn-primary" />
+            <input type="submit" name="btnReset" value="Reset" class="btn btn-sm btn-primary" />
+        </div>
+    }*@
+<div class="panel-body">
+    @using (Html.BeginForm())
+    {
+        <div class="col-md-6 row">
+            <div class="form-group">
+                <div class="col-md-4">
+                    <div class="label-wrapper">
+                        <label class="control-label form-inline">
+                            Category  <i title="A category name." data-toggle="tooltip" class="fa fa-question-circle"
+                                         style="padding: 0px 10px;"></i>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    @Html.DropDownList("Category", ViewBag.CategoryId as SelectList, " Select Category", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-4 cloumnsFour">
+                        <input type="submit" name="btnSearch" value="Search" class="btn btn-sm btn-primary col-md-4 form-control" />
+                    </div>
+                    <div class="col-md-4 cloumnsFour">
+                        <input type="submit" name="btnReset" value="Reset" class="btn btn-sm btn-primary col-md-4 form-control" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+    @*<table class="table" border="1" id="filterTable">
+            <tr border="1" style="background-color:#f4f4f4; color:black">
+                sdfsfsf
+            </tr>
+        </table>*@
+</div>
+<div class="panel-body">
+    <table class="table table-condensed table-striped table-hover tablesorter" id="adminSubCatList">
+        <thead >
+            <tr class="tableHeader" style="background-color:#3c8dbc;color:white">
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SubCategoryName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ImageName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UpdatedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedByUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UpdatedByUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubCategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedByUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedByUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    <a class="btn btn-default" href="/Admin/SubCategory/Edit/@item.PKSubCategoryId">
+                        <i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                </td>
+                @*<td>
+                    @Html.ActionLink("Details", "Details", new { id = item.PKSubCategoryId })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PKSubCategoryId })
+                </td>*@
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#adminSubCatList').DataTable({
+                'bSort': false,
+
+                'aoColumns': [
+                    { sWidth: "25%", bSearchable: true, bSortable: true },
+                    { sWidth: "25%", bSearchable: true, bSortable: true },
+                    { sWidth: "10%", bSearchable: true, bSortable: true },
+                    { sWidth: "45%", bSearchable: true, bSortable: true },
+                    { sWidth: "45%", bSearchable: true, bSortable: true },
+                    { sWidth: "10%", bSearchable: true, bSortable: true },
+                    { sWidth: "45%", bSearchable: true, bSortable: true },
+                    { sWidth: "10%", bSearchable: true, bSortable: true },
+                    { sWidth: "10%", bSearchable: true, bSortable: true }
+                    //match the number of columns here for table1
+                ],
+                "bAutoWidth": false,
+                "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+                "info": true,
+                "paging": true
+                
+            });
+        })
+    </script>
+    }

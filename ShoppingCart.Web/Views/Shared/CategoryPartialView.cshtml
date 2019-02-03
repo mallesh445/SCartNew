@@ -1,0 +1,39 @@
+﻿@model string
+@using ShoppingCart.Web.BO;
+@{
+    CategoryBO objCategoryBO = new CategoryBO();
+}
+<head>
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/MyScripts.js"></script>
+</head>
+<div id="catListDiv">
+    <ul class="list-group" id="pv_CategoriesList">
+        <li style="list-style: none;font-size:18px;padding: 5px 12px;">@Model</li>
+        @{int i = 0;}
+        @foreach (Category item in objCategoryBO.GetCategories())
+        {
+            <li style="list-style: none;" class="list-group-item-success active" id="@string.Format("listItem{0}",i)">
+                <a class="btn" href="@Url.Action("GetSubCategory", "Catelog", new { categoryId = item.PKCategoryId, categoryName = item.CategoryName })">@item.CategoryName</a><br />
+            </li>
+            i++;
+        }
+        @*<li><button id="dddd">dd</button></li>*@
+    </ul>
+</div>
+<script> 
+    //var header = document.getElementById("catListDiv");
+    //var btns = header.getElementsByClassName("btn");
+    //for (var i = 0; i < btns.length; i++) {
+    //    btns[i].addEventListener("click", function () {
+    //        var current = document.getElementsByClassName("active");
+    //        current[0].className = current[0].className.replace(" active", "");
+    //        this.className += " active";
+    //    });
+    //}
+    //var header = document.getElementById("bs-example-navbar-collapse-1");
+    //$("#dddd").click(function () {
+    //    alert('clicked');
+    //});
+</script>

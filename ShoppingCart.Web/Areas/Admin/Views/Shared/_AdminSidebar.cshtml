@@ -1,0 +1,74 @@
+﻿@using WebHelpers.Mvc5
+<aside class="main-sidebar">
+    <section class="sidebar">
+        @* BEGIN Search *@
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+        @* END Search *@
+        @* BEGIN Menu *@
+        <ul class="sidebar-menu" data-widget="tree">
+            <li class="header">HEADER</li>
+            <li class="@Url.IsLinkActive("Index", "Default")">
+                <a href="@Url.Action("Index", "Default")"><i class="fa fa-home"></i> <span>Home</span></a>
+            </li>
+            <li class="@Url.IsLinkActive("Index", "Category")">
+                <a href="@Url.Action("Index", "Category")"><i class="fa fa-h-square"></i> <span>Categories</span></a>
+            </li>
+            <li class="@Url.IsLinkActive("Index", "SubCategory")">
+                <a href="@Url.Action("Index", "SubCategory")"><i class="fa fa-h-square"></i> <span>Sub Categories</span></a>
+            </li>
+            <li class="@Url.IsLinkActive("Index", "Product")">
+                <a href="@Url.Action("Index", "Product")"><i class="fa fa-product-hunt"></i> <span>Products</span></a>
+            </li>
+            <li class="@Url.IsLinkActive("Index", "Order")">
+                <a href="@Url.Action("Index", "Order")"><i class="fa fa-first-order"></i> <span>Orders</span></a>
+            </li>
+            <li class="@Url.IsLinkActive("Index", "ErrorHistory")">
+                <a href="@Url.Action("Index", "ErrorHistory")"><i class="fa fa-exclamation"></i> <span>ErrorHistory</span></a>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-link"></i> <span>Customers</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@Url.IsLinkActive("Index", "UserProfile")">
+                        <a href="@Url.Action("Index", "UserProfile")"><i class="fa fa-user-circle"></i> <span>Users</span></a>
+                    </li>
+                    <li class="@Url.IsLinkActive("Index", "UserProfile")">
+                        <a href="@Url.Action("Index", "UserProfile")"><i class="fa fa-magnet"></i> <span>Roles</span></a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-gears"></i> <span>Configuration</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-gear"></i> General Settings</a></li>
+                    <li><a href="#">Customers  Settings</a></li>
+                    <li><a href="#">Orders Settings</a></li>
+                    <li><a href="#">Shipping Settings</a></li>
+                    <li><a href="#">ShoppingCart Settings</a></li>
+                    <li><a href="#">Tax Settings</a></li>
+                </ul>
+            </li>
+        </ul>
+        @* END Menu *@
+    </section>
+</aside>

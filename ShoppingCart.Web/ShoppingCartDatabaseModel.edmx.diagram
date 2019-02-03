@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="50e118b5c5bf4b2697dbf84d1813db02" Name="Diagram1">
+        <EntityTypeShape EntityType="ShoppingStoreDBModel.BillingAddress" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingStoreDBModel.Category" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingStoreDBModel.ErrorHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingStoreDBModel.Order" Width="1.5" PointX="7.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingStoreDBModel.OrderDetail" Width="1.5" PointX="12.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingStoreDBModel.OrderHistory" Width="1.5" PointX="9.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingStoreDBModel.Product" Width="1.5" PointX="10.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingStoreDBModel.ProductImage" Width="1.5" PointX="12.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingStoreDBModel.Role" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingStoreDBModel.SubCategory" Width="1.5" PointX="7.5" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingStoreDBModel.UserLoginHistory" Width="1.5" PointX="5.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ShoppingStoreDBModel.UserProfile" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_BillingAddress_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_Order_BillingAddress" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_Category_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_Category_UserProfile1" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_Product_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_SubCategory_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_Order_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_OrderDetail_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_OrderHistory_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_Orders_UserProfile1" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_OrderDetail_Product1" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_Product_SubCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_Product_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_Product_UserProfile1" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_ProductImage_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK__UserProfi__FKRol__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_SubCategory_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_SubCategory_UserProfile1" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_UserLoginHistory_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_UserProfile_UserProfile" ManuallyRouted="false" />
+        <AssociationConnector Association="ShoppingStoreDBModel.FK_UserProfile_UserProfile1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

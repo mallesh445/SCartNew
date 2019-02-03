@@ -1,0 +1,122 @@
+﻿@using System.Web.Optimization
+@{
+    int quantitesTemp = 0;
+    if (Helper.UserName != null)
+    {
+        HttpCookie CartCookie = Request.Cookies[Helper.UserName];
+        if (CartCookie != null)
+        {
+            foreach (var item in CartCookie.Values)
+            {
+                string cookieValue = Convert.ToString(CartCookie[Convert.ToString(item)]);
+                if (cookieValue != null)
+                {
+                    int qty = int.Parse(@cookieValue.Split('^')[0]);
+                    quantitesTemp = quantitesTemp + qty;
+                }
+            }
+        }
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Store App</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @Html.Partial("_NavBar")
+</head>
+@{
+    var id = Request.Url.Segments.Last();
+    string actionName = ViewBag.Title;
+    ViewBag.Pv_Parameter = "Categories";
+}
+<body>
+
+    <div class="container">
+        <div class="loader" style="display:none"></div>
+        <div class="row">
+            <div class="col-xs-2">
+                @*<p style="font-weight:bold;font-size:20px;padding-left:15px;">Categories</p><br />*@
+                @Html.Partial("CategoryPartialView", (string)ViewBag.Pv_Parameter)
+            </div>
+            <div class="col-xs-10">
+                <br />
+                @*<div class="row">
+                        @Html.Partial("_Breadcrumbs", (string)Request["categoryName"])
+                    </div>*@
+                <div>
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        <hr />
+        @*<link href="https://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css" rel="stylesheet">*@
+        <!--footer start from here-->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 footerleft ">
+                        <div class="logofooter"><img src="/Images/Logo.jpg" height="100" /></div>
+                        <p>Online Shopping Store.</p>
+                        <p><i class="fa fa-map-pin"></i> 210, Deccansoft, opp.Pardise Hotel, Hyderabad -        110085, INDIA</p>
+                        <p><i class="fa fa-phone"></i> Phone (India) : +91 9******5***</p>
+                        <p><i class="fa fa-envelope"></i> E-mail : info@ShoppingStore.com</p>
+
+                    </div>
+                    <div class="col-md-2 col-sm-6 paddingtop-bottom">
+                        <h6 class="heading7">GENERAL LINKS</h6>
+                        <ul class="footer-ul Primary">
+                            <li>@Html.ActionLink("Home", "Index", "Home", new { style = " color:#a0a3a4" })</li>
+                            <li><a href="#"> Privacy Policy</a></li>
+                            <li><a href="#"> Terms & Conditions</a></li>
+                            <li><a href="#"> Frequently Ask Questions</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-6 paddingtop-bottom">
+                        <h6 class="heading7">LATEST POST</h6>
+                        <div class="post">
+                            <p>facebook crack the movie advertisment code:what it means for you <span>june 23,2016</span></p>
+                            <p>facebook crack the movie advertisment code:what it means for you <span>june 22,2016</span></p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 paddingtop-bottom">
+                        <div class="fb-page" data-href="https://www.facebook.com/facebook" data-tabs="timeline" data-height="300" data-small-header="false" style="margin-bottom:15px;" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                            <div class="fb-xfbml-parse-ignore">
+                                <blockquote cite="https://www.facebook.com/facebook"><a href="https://www.facebook.com/facebook">Facebook</a></blockquote>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!--footer start from here-->
+
+    <div class="copyright">
+        <div class="container">
+            <div class="col-md-6">
+                <p>&copy; @DateTime.Now.Year - Hi-Fi Store</p>
+            </div>
+            <div class="col-md-6">
+                <ul class="bottom_ul">
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Faq's</a></li>
+                    <li><a href="#">Contact us</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,88 @@
+﻿@model ShoppingCart.Web.Order
+
+@{
+    ViewBag.Title = "Delete Order";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div class="panel-body">
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveredDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveredDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerComment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerComment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminComment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminComment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BillingAddress.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BillingAddress.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserProfile.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserProfile.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserProfile1.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserProfile1.UserName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

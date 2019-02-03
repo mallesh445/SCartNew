@@ -1,0 +1,79 @@
+﻿@model ShoppingCart.Web.BillingAddress
+@{
+    ViewBag.Title = "PlaceOrder";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<h2>Billing Address</h2>
+
+@using(Html.BeginForm())
+{
+    <table>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model=>model.FirstName)
+            </td>
+            <td>
+                @Html.EditorFor(model=>model.FirstName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model=>model.LastName)
+                </td>
+            <td>
+                @Html.EditorFor(model=>model.LastName)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model=>model.AddressLine1)
+            </td>
+            <td>
+                @Html.EditorFor(model=>model.AddressLine1)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.AddressLine2)
+            </td>
+            <td>
+                @Html.EditorFor(model=>model.AddressLine2)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model=>model.City)
+            </td>
+            <td>
+                @Html.EditorFor(model=>model.City)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model=>model.State)
+            </td>
+            <td>
+                @Html.EditorFor(model=>model.State)
+            </td>
+        </tr>
+        <tr>
+            <td>
+            @Html.DisplayNameFor(model=>model.Country)
+              </td>
+            <td>
+                @Html.EditorFor(model=>model.Country)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model=>model.ZipCode)
+            </td>
+            <td>
+                @Html.EditorFor(model=>model.ZipCode)
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="Confirm" name="btnSubmit" class="btn btn-sm btn-primary" />
+    <a href="@Url.Action("AddToCart","ShoppingCart")"><input type="button" value="Cancel" name="btnCancel" class="btn btn-sm btn-primary" /></a>
+}

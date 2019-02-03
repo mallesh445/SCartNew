@@ -1,0 +1,125 @@
+﻿@model IEnumerable<ShoppingCart.Web.Category>
+<head>
+    <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+    @*<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" />*@
+</head>
+<div class="clearfix">
+    <div class="pull-left" style="font-size: 26px;">Categories</div>
+    <div class="pull-right">
+        <a class="btn bg-blue" href="Category/Create"><i class="fa fa-plus-square"></i> Add New</a>
+        <button type="button" class="btn btn-success" id="btnExportData" >
+            <i class="fa fa-download"></i>
+            Export
+        </button>
+    </div>
+</div>
+
+<div class="panel-body">
+    <table class="table" id="adminCategoriesTable">
+        <thead>
+            <tr class="tableHeader">
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedByUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UpdatedByUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UpdatedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </th>
+
+                <th>Action</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedByUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedByUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="/Admin/Category/Edit/@item.PKCategoryId">
+                        <i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                    @* @Html.ActionLink("Edit", "Edit", new { id = item.PKCategoryId })
+        |@Html.ActionLink("Details", "Details", new { id = item.PKCategoryId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PKCategoryId })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#adminCategoriesTable').DataTable({
+                'bSort': true,
+
+                'aoColumns': [
+                    { sWidth: "25%", bSearchable: true, bSortable: true, className: "dt-left"},
+                    { sWidth: "20%", bSearchable: true, bSortable: true, className:"dt-left" },
+                    { sWidth: "10%", bSearchable: true, bSortable: true, className: "dt-left" },
+                    { sWidth: "22%", bSearchable: true, bSortable: true, className: "dt-left" },
+                    { sWidth: "22%", bSearchable: true, bSortable: true, className: "dt-left"},
+                    { sWidth: "10%", bSearchable: true, bSortable: true },
+                    { sWidth: "45%", bSearchable: true, bSortable: true },
+                    //{ sWidth: "10%", bSearchable: true, bSortable: true },
+                    //match the number of columns here for table1
+                ],
+                "bAutoWidth": false,
+                "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+                "info": true,
+                "paging": true,
+                "fnInitComplete": function () {
+
+                    $("#adminCategoriesTable").css("width", "100%");
+                }
+            });
+
+            $('#btnExportData').click(function () {
+                $("#adminCategoriesTable").table2excel({
+                   // exclude: ".excludeThisClass",
+                    //name: "Worksheet Name",
+                    filename: "SomeFile.xls" //do not include extension
+                    //fnExcelReport();
+                });
+            });
+            function fnExcelReport() {
+                var tab_text = $('#adminCategoriesTable').val();
+                
+                    txtArea1.document.open("txt/html", "replace");
+                    txtArea1.document.write(tab_text);
+                    txtArea1.document.close();
+                    txtArea1.focus();
+                    sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+                
+            }
+        })
+    </script>
+}

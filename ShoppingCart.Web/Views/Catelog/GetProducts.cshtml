@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ShoppingCart.Web.Product>
+@{
+    ViewBag.Title = "Products";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<div class="container bottomSolidClass">
+    <div>
+        <ol class="breadcrumb">
+            @if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
+            {
+                <li>
+                    @Html.ActionLink("Home", "Index", "Home")
+                </li>
+                <li>
+                    @Html.ActionLink((string)Request["categoryName"], ViewContext.RouteData.Values["action"].ToString())
+                </li>
+                <li class="active">
+                    @Html.ActionLink((string)Request["subCategoryName"], ViewContext.RouteData.Values["action"].ToString())
+                    @*@Html.ActionLink(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["action"].ToString())*@
+                </li>
+            }
+            else
+            {
+                <li class="active">
+                    @Html.ActionLink("Home", "Index", "Home")
+                </li>
+            }
+        </ol>
+    </div>
+
+    <div style="font-weight:bold;font-size:18px;margin:0px 0px 0px 15px">@ViewBag.subCategoryName</div>
+    @foreach (var items in Model)
+    {
+        <div class="col-sm-3 img-responsive product-card">
+            <a href=@Url.Action("GetProductImages", "Catelog", new {productId=@items.PKProductId })><center><img src="@items.ImagePath" alt="Loading.." style="max-height:150px" /><br /> @items.ImageName.Split('.')[0].ToString()</center></a>
+
+        </div>
+    }
+</div>

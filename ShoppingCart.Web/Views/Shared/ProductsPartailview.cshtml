@@ -1,0 +1,24 @@
+﻿@using ShoppingCart.Web.BO
+@{
+    ProductBO objProductBO = new ProductBO();
+}
+
+<div class="row">
+
+    @foreach (var product in objProductBO.GetProducts())
+    {
+    <div class="panel-collapse product-myview">
+        @*<div class="col-xs-12 col-sm-3 img-responsive" style="padding-bottom:10px;border:1px solid;padding-right:2px">
+            <a href=@Url.Action("GetProductImages", "Catelog", new { productId = product.PKProductId })><img src="@product.ImagePath" alt="Loading..." height="150" width="150" /></a><br />
+            <span>@product.ProductName</span> <span></span>$ <span>@product.Price</span>
+        </div>*@
+        <div class="panel panel-success col-xs-12 col-sm-3 img-responsive product-card" style="border:none !important">
+            <div class="panel-heading"><span>@product.ProductName</span> <span></span>$ <span>@product.Price</span></div>
+            <div class="panel-body"  style="padding-bottom:10px;border:2px solid #F5F5F5;padding-right:2px">
+            <a href=@Url.Action("GetProductImages", "Catelog", new { productId = product.PKProductId })><img src="@product.ImagePath" alt="Loading..." height="150" width="150" /></a>
+            </div>
+        </div><span></span>
+    </div>
+    }
+
+</div>

@@ -1,0 +1,81 @@
+﻿@model ShoppingCart.Web.Order
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="panel-body">
+    <h4>Order Details</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliveredDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliveredDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerComment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerComment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminComment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminComment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BillingAddress.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BillingAddress.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserProfile.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserProfile.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserProfile1.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserProfile1.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PKOrderId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

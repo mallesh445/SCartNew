@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ShoppingCart.Web.UserLoginHistory>
+
+@{
+    ViewBag.Title = "UserLoginHistory";
+}
+<div class="panel-body">
+    <h2>User Login History </h2>
+    <p>
+        @Html.ActionLink("Back To List", "Index")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserProfile.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LoginDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IPAddress)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserProfile.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LoginDateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IPAddress)
+                </td>
+            </tr>
+        }
+    </table>
+    <p>
+        @Html.ActionLink("Back To List", "Index")
+    </p>
+</div>

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ShoppingCart.Web.Order>
+
+@{
+    ViewBag.Title = "GetOrderDetails";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+<h2>OrderDetails</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeliveredDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerComment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdminComment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeliveredDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerComment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdminComment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+    </tr>
+}
+
+</table>

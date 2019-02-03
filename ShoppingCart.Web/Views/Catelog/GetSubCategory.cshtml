@@ -1,0 +1,43 @@
+﻿@model  IEnumerable<ShoppingCart.Web.SubCategory>
+@{
+    ViewBag.Title = "SubCategory";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+<div style="font-weight:bold;font-size:18px;margin:0px 0px 0px 15px">@ViewBag.CategoryName</div>
+<div class="container bottomSolidClass">
+    <div>
+        <ol class="breadcrumb">
+            @if (ViewContext.RouteData.Values["controller"].ToString() != "Home")
+            {
+                <li>
+                    @Html.ActionLink("Home", "Index", "Home")
+                </li>
+                <li>
+                    @Html.ActionLink((string)Request["categoryName"], ViewContext.RouteData.Values["action"].ToString())
+                </li>
+            }
+        </ol>
+    </div>
+    @foreach (var items in Model)
+    {
+        <div class="col-xs-3 img-responsive  product-card">
+            <a href="@Url.Action("GetProducts", "Catelog", new { categoryId = @items.FKCategoryId, categoryName = @items.CategoryName, subCategoryId = @items.PKSubCategoryId, subCategoryName = @items.SubCategoryName })"><img src="@items.ImagePath" alt="Loading..... " height="150" width="150" /></a>
+            <p>@items.ImageName.Split('.')[0].ToString()</p>
+        </div>
+    }
+</div>
+@section Scripts{
+    <script src="~/Scripts/jquery.elevatezoom.js"></script>
+    <script type="text/javascript">
+     
+        $(document).ready(function () {
+            $('#listItem0').click(function () {
+                //alert("Hi");
+                $('#listItem0').css({ 'color': 'dodgerblue', 'border-left-color': 'dodgerblue', 'border-left':'2px solid'});
+            });
+            
+            $('.mylistgroup-active:first').css('border-right', '1px solid black');
+        });
+        
+    </script>
+}

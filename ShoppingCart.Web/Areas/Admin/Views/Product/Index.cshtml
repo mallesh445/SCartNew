@@ -1,0 +1,187 @@
+﻿@model IEnumerable<ShoppingCart.Web.Product>
+
+@{
+    ViewBag.Title = "Products";
+}
+<div class="clearfix">
+    <div class="pull-left" style="font-size: 26px;">@ViewBag.Title</div>
+    <div class="pull-right">
+        <a class="btn bg-blue" href="Product/Create"><i class="fa fa-plus-square"></i> Add New</a>
+        <button type="button" class="btn btn-success">
+            <i class="fa fa-download"></i>
+            Export
+        </button>
+        <button type="button" class="btn btn-success">
+            <i class="fa fa-upload"></i>
+            Import
+        </button>
+    </div>
+</div>
+
+<div>
+    @*<p>@Html.ActionLink("Add Product", "Create") </p>*@
+    <div class="panel-body">
+        @using (Html.BeginForm())
+        {
+            @Html.Label("Category:")
+            @Html.DropDownList("Category", ViewBag.Category as SelectList, "Select Category")
+            @Html.Label("SubCategory:")
+            @Html.DropDownList("SubCategory", ViewBag.SubCategory as SelectList, "Select SubCategory")
+            <input type="submit" name="btnSearch" value="Search" class="btn btn-sm btn-primary" />
+            <input type="submit" name="btnReset" value="Reset" class="btn btn-sm btn-primary" />
+        }
+    </div>
+
+    <div class="panel-body">
+        <table class="table table-condensed table-striped table-hover" id="adminProductsTable" style="width:auto">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CategoryName)
+                    </th>
+                    <th>
+                        Sub Category
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Quantity)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedByUser)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UpdatedByUser)
+                    </th>
+                    @*<th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedDate)
+        </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubCategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedByUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedByUser)
+                </td>
+                @*<td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedDate)
+        </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                @*<td>
+            <a href="@Url.Action("Index", "ProductImage", new {id=item.PKProductId })">GetProductImage</a>
+        </td>*@
+                <td>
+                    <a class="btn btn-default" href="/Admin/Product/Edit/@item.PKProductId">
+                        <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                    </a>
+                </td>
+                @*<td>
+            @Html.ActionLink("Details", "Details", new { id = item.PKProductId })
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id = item.PKProductId })
+        </td>*@
+            </tr>
+            }
+
+        </table>
+
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            $('#adminProductsTable').DataTable({
+                'bSort': true,
+
+                'aoColumns': [
+                    { sWidth: "35%", bSearchable: true, bSortable: true },
+                    { sWidth: "30%", bSearchable: true, bSortable: true },
+                    { sWidth: "30%", bSearchable: true, bSortable: true },
+                    { sWidth: "45%", bSearchable: true, bSortable: true },
+                    { sWidth: "45%", bSearchable: true, bSortable: true },
+                    { sWidth: "10%", bSearchable: true, bSortable: true },
+                    { sWidth: "45%", bSearchable: true, bSortable: true },
+                    //{ sWidth: "45%", bSearchable: true, bSortable: true },
+                    { sWidth: "10%", bSearchable: true, bSortable: true },
+                    { sWidth: "45%", bSearchable: true, bSortable: true },
+                    { sWidth: "10%", bSearchable: true, bSortable: true },
+                    //{ sWidth: "10%", bSearchable: true, bSortable: true },
+                    //match the number of columns here for table1
+                ],
+                "bAutoWidth": false,
+                "aLengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+                "info": true,
+                "paging": true,
+                "fnInitComplete": function () {
+
+                    $("#adminProductsTable").css("width", "100%");
+                }
+            });
+
+
+            $('#Category').change(function (e) {
+                var id = $(this).val();
+                if (id != "") {
+                    $.ajax({
+                        url: "Product/GetSubCategories",
+                        data: { id: id },
+                        type: "GET"
+                    }).success(function (data) {
+
+                        $("#SubCategory").empty();
+                        $.each(data, function (key, value) {
+                            $("#SubCategory").append($("<option></option>").val(value.PKSubCategoryId).html(value.SubCategoryName));
+                        });
+                    })
+                }
+            })
+            $('#Category').trigger('change');
+        })
+    </script>
+}

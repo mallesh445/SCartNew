@@ -1,0 +1,107 @@
+﻿@model ShoppingCart.Web.Product
+@using ShoppingCart.Web.BO
+@{ProductBO objProductBO = new ProductBO();}
+@{
+    ViewBag.Title = "ShowCart";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+    int availableProducts = 0;
+    int availableQuantity = 0;
+}
+
+<h2>ShowCart</h2>
+@using (Html.BeginForm())
+{
+    HttpCookie CartCookie = Request.Cookies[Helper.UserName];
+    <table class="table table-bordered table-responsive">
+        <tr>
+            <th>ProductId</th>
+            <th>ProductName</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Totalprice</th>
+            <th>CustomerComment</th>
+
+        </tr>
+        @if (CartCookie != null)
+        {
+            foreach (var item in CartCookie.Values)
+            {
+                Product product = objProductBO.GetProduct(Convert.ToInt32(item));
+                if (product != null)
+                {
+                    availableProducts = product.PKProductId;
+                    availableQuantity = product.Quantity;
+                    string cookieValue = CartCookie[item.ToString()].ToString();
+                    <tr>
+                        <td>@(product.PKProductId)</td>
+                        <td>@(product.ProductName)</td>
+                        <td><input type="text" name="txtQuantity" id="Quantity" value="@cookieValue.Split('^')[0]" class="quantityClass" /></td>
+                        <td><input class="priceClass" type="text" name="txtPrice" id="Price" value="@product.Price" readonly="readonly" /></td>
+                        <td><input class="total" type="text" name="txtTotal" value="@cookieValue.Split('^')[1]" /></td>
+                        <td><input type="text" name="txtCustomerComment" class="CustomerComment" /></td>
+                        <td>
+                            <a href="@Url.Action("ShowCartProductRemove", "ShoppingCart", new { deleteId = product.PKProductId })">
+                                delete
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+    <br />
+    <a href="@Url.Action("Index", "Home")">ContinueShopping </a>
+    if (availableProducts != 0)
+    {
+        <a href="@Url.Action("PlaceOrder", "Confirm")"><input type="button" value="ConfirmOrder" name="btnConfirmOrder" class="btn-primary" /></a>
+    }
+}
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.quantityClass').change(function (e) {
+                var id = "@availableProducts";
+                var availableqty = "@availableQuantity"
+                var qty = $(this).val();
+                var price = $(this).parent().next().find(".priceClass").val();
+                if (qty <= availableqty) {
+                    var total = qty * price;
+                    $(this).parent().nextAll().find(".total").val(total);
+                    var customerComment = $(this).parent().nextAll().find(".CustomerComment").val();
+
+                    $.ajax({
+                        url: "GetShowCartDetails",
+                        data: { id: id, total: total, qty: qty, customerComment: customerComment },
+                        type: 'Get',
+                    }).success(function (data) {
+
+                    })
+                }
+                else {
+                    alert("Available quantity is: " + availableqty);
+                }
+            });
+
+        });
+        $(document).ready(function () {
+            $(".CustomerComment").change(function (e) {
+                var id = "@availableProducts";
+                var qty = $(this).parent().prevAll().find(".quantityClass").val();
+                var price = $(this).parent().prevAll().find(".priceClass").val();
+                var total = qty * price;
+                var customerComment = $(this).val();
+                $.ajax({
+                    url: "GetShowCartDetails",
+                    data: { id: id, total: total, qty: qty, customerComment: customerComment },
+                    type: 'Get',
+                }).success(function (data) {
+
+                })
+            });
+
+        });
+
+    </script>
+}

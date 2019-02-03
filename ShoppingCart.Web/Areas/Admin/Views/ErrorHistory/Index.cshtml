@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ErrorHistory>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.FKUserId)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.ErrorMessage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ControllerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActionName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ErrorLogTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.FKUserId)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.ErrorMessage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ControllerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActionName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ErrorLogTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PKErrorId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PKErrorId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PKErrorId })
+        </td>
+    </tr>
+}
+
+</table>
