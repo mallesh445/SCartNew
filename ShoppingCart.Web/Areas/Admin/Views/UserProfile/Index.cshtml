@@ -2,28 +2,28 @@
 @{
     ViewBag.Title = "UserProfile";
 }
+<h2>Customers </h2>
+
+<p>
+    @Html.ActionLink("Add Customer", "Create")
+</p>
 
 <div class="panel-body">
-    <h2>@ViewBag.Title</h2>
+    @Html.Label("EmailId")
+    <input type="text" name="txtEmailId" />
+    @Html.Label("PhoneNo")
+    <input type="text" name="txtPhoneNo" />
+    @Html.Label("CreatedDate")
+    <input type="text" name="txtFromDate" class="Date" />
+    @Html.Label("To")
+    <input type="text" name="txtToDate" class="Date" />
+    <input type="submit" name="btnSearch" value="Search" class="btn btn-sm btn-primary" />
+    <input type="submit" name="btnReset" value="Reset" class="btn btn-sm btn-primary" />
+</div>
 
-    <p>
-        @Html.ActionLink("Add UserProfile", "Create")
-    </p>
+<div class="panel-body">
     @using (Html.BeginForm())
     {
-        <div>
-            @Html.Label("EmailId")
-            <input type="text" name="txtEmailId" />
-            @Html.Label("PhoneNo")
-            <input type="text" name="txtPhoneNo" />
-            @Html.Label("CreatedDate")
-            <input type="text" name="txtFromDate" class="Date" />
-            @Html.Label("To")
-            <input type="text" name="txtToDate" class="Date" />
-            <input type="submit" name="btnSearch" value="Search" class="btn btn-sm btn-primary" />
-            <input type="submit" name="btnReset" value="Reset" class="btn btn-sm btn-primary" />
-        </div>
-        ;
         <table class="table table-condensed table-striped table-hover" id="adminUsersTable">
             <thead>
                 <tr>
