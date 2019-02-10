@@ -43,5 +43,29 @@ namespace ShoppingCart.Web.Controllers
             ViewBag.Imagepath = imagePath;
             return View(objProductBO.GetProduct(productId));
         }
-	}
+         
+        [HttpPost]
+        public JsonResult CreateNewCategory()
+        {
+            string categoryName = "ll";
+            if (!string.IsNullOrEmpty(categoryName))
+            {
+                Category _category = new Category() { CategoryName = categoryName };
+              //  objCategoryBO.InsertCategory(_category);
+            }
+            return Json(categoryName, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult CreateNewCategory(string hu)
+        {
+            string categoryName = hu;
+            if (!string.IsNullOrEmpty(categoryName))
+            {
+                Category _category = new Category() { CategoryName = categoryName };
+                //  objCategoryBO.InsertCategory(_category);
+            }
+            return Json(categoryName, JsonRequestBehavior.AllowGet);
+        }
+    }
 }

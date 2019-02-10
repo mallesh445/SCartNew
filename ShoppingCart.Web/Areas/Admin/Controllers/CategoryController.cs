@@ -57,6 +57,20 @@ namespace ShoppingCart.Web.Areas.Admin.Controllers
             return View(category);
         }
 
+        // POST: /Admin/Category/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        public JsonResult CreateNewCategory(string categoryName)
+        {
+            if (!string.IsNullOrEmpty(categoryName))
+            {
+                Category _category = new Category() { CategoryName = categoryName };
+                objCategoryBO.InsertCategory(_category);
+            }
+            return Json(categoryName,JsonRequestBehavior.AllowGet);
+        }
+
         // GET: /Admin/Category/Edit/5
         public ActionResult Edit(int? id)
         {

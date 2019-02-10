@@ -34,6 +34,7 @@ namespace ShoppingCart.Web.App_Start
                 .Include("~/Content/js/plugins/inputmask/jquery.inputmask.bundle.js")
                 .Include("~/Content/js/adminlte.js")
                 .Include("~/Content/js/init.js")
+                .Include("~/Scripts/jquery.unobtrusive-ajax.min.js")
                 .Include("~/Scripts/jquery.dataTables.min.js")
                 .Include("~/Scripts/dataTables.bootstrap4.min.js")
                 );
