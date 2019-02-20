@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using ShoppingCart.Utilities.ExcelModel;
 
 namespace ShoppingCart.Web.BO
 {
@@ -92,6 +93,30 @@ namespace ShoppingCart.Web.BO
                 throw ex;
             }
         }
+
+        internal void InsertSubCategoriesInBulk(List<SubCategoryImportExcel> records)
+        {
+            try
+            {
+                IList<SubCategory> subCategoryList = new List<SubCategory>();
+                foreach (var item in records)
+                {
+                    SubCategory subCategoryExcel = new SubCategory();
+                    subCategoryExcel.CreatedDate = DateTime.Now;
+                    subCategoryExcel.CategoryName = item.CategoryName;
+                    subCategoryExcel.SubCategoryName = item.SubCategoryName;
+                    subCategoryExcel.FKCreatedByUserId =item.FKCreatedByUserId;
+                    subCategoryList.Add(subCategoryExcel);
+                }
+                context.SubCategories.AddRange(subCategoryList);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public void DeleteSubCategory(int subCategoryId)
         {
             try

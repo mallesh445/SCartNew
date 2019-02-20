@@ -56,10 +56,13 @@
 @section Scripts{
     <script src="~/Scripts/jquery.elevatezoom.js"></script>
     <script type="text/javascript">
-        $(window).load(function () {
+        $(window).on("load", function () {
             $(".loader").fadeOut('slow');
         });
         $(".Zoom").elevateZoom();
+        //$(window).load(function () {
+        //    $(".loader").fadeOut('slow');
+        //});
         //$('#btnSubmit').click(function () {
         //    //alert("Hi");
         //    $('.loader').show();
@@ -68,10 +71,10 @@
         $(document).ready(function () {
             $('.loader').show();
         });
-                    // $('#listItem0').click(function () {
-                    //     alert("Hi");
-                    //});
+                        // $('#listItem0').click(function () {
+                        //     alert("Hi");
+                        //});
 
-                    //$('#Password').addClass('form-control');
+                        //$('#Password').addClass('form-control');
     </script>
 }

@@ -22,7 +22,8 @@
     {
         <div class="col-xs-3 img-responsive  product-card">
             <a href="@Url.Action("GetProducts", "Catelog", new { categoryId = @items.FKCategoryId, categoryName = @items.CategoryName, subCategoryId = @items.PKSubCategoryId, subCategoryName = @items.SubCategoryName })"><img src="@items.ImagePath" alt="Loading..... " height="150" width="150" /></a>
-            <p>@items.ImageName.Split('.')[0].ToString()</p>
+            <p>@items.SubCategoryName</p>
+    @*<p>@items.ImageName.Split('.')[0].ToString()</p>*@
         </div>
     }
 </div>

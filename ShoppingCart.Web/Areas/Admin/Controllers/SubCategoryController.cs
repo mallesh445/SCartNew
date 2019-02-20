@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using ShoppingCart.Web;
 using ShoppingCart.Web.BO;
 using System.Web.UI.WebControls;
+using ShoppingCart.Utilities;
+using ShoppingCart.Utilities.ExcelModel;
 
 namespace ShoppingCart.Web.Areas.Admin.Controllers
 {
@@ -59,6 +61,61 @@ namespace ShoppingCart.Web.Areas.Admin.Controllers
         {
             ViewBag.FKCategoryId = new SelectList(objCartegoryBO.GetCategories(true), "PKCategoryId", "CategoryName");
             return View();
+        }
+
+        /// <summary>
+        /// ImportSubCategories
+        /// </summary>
+        /// <param name="postedExcelFile"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ImportSubCategories(HttpPostedFileBase postedExcelFile)
+        {
+            if (ModelState.IsValid)
+            {
+                if (postedExcelFile == null)
+                {
+                    ModelState.AddModelError("File", "Please Upload Your file");
+                }
+                else if (postedExcelFile.ContentLength > UtilityConstants.MaxContentLength)
+                {
+                    return Content("SizeExceed");
+                }
+                else if (postedExcelFile.ContentLength > 0)
+                {
+                    string path = ExcelHelper.SavePathForThePostedFile(postedExcelFile);
+
+                    if (!(path.Contains("xlsx") || path.Contains("xls")))
+                        return Content("FileFormatError");
+
+                    try
+                    {
+                        List<SubCategoryImportExcel> records = ExcelHelper.ReadSheet<SubCategoryImportExcel>(path, true, 0, null, true).ToList();
+                        records = records.Where(r => !string.IsNullOrEmpty(r.SubCategoryName)).ToList();
+                        if (records.Count > 0)
+                        {
+                            objSubCategoryBO.InsertSubCategoriesInBulk(records);
+                            TempData["Success"] = $"\"NumberOfRecords Uploaded\" : {records.Count()}";
+                            return RedirectToAction("Index");
+                        }
+                        TempData["Success"] = $"\"NumberOfRecords Uploaded\" : 0";
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex.Message.Contains("InValidZipCode"))
+                        {
+                            return Content(ex.Message);
+                        }
+                    }
+                }
+            }
+            return Content("Error");
+            //if (Request.Files["postedExcelFile"].ContentLength > 0)
+            //{
+            //    string fileExtension = System.IO.Path.GetExtension(Request.Files["postedExcelFile"].FileName);
+            //}
+            // return View();
         }
 
         // POST: /Admin/SubCategory/Create

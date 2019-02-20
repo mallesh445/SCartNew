@@ -49,9 +49,13 @@
 <script src="~/Scripts/jquery.elevatezoom.js"></script> 
      <script type="text/javascript">
          $(".Zoom").elevateZoom();
-         $(window).load(function () {
-             $('.loader').show();
+         $(window).on("load", function () {
+             $(".loader").show();
              $(".loader").fadeOut("slow");
          });
+         //$(window).load(function () {
+         //    $('.loader').show();
+         //    $(".loader").fadeOut("slow");
+         //});
     </script>
 }

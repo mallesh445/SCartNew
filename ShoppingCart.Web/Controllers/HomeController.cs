@@ -39,5 +39,11 @@ namespace ShoppingCart.Web.Controllers
             return View();
         }
 
-	}
+        [HttpPost]
+        public ActionResult AddData(string ListID, string ItemName)
+        {
+            return Content(ListID + " " + ItemName);
+        }
+
+    }
 }

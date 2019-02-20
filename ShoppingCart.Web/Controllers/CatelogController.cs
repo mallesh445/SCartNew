@@ -44,7 +44,7 @@ namespace ShoppingCart.Web.Controllers
             return View(objProductBO.GetProduct(productId));
         }
          
-        [HttpPost]
+        [HttpPost,HttpGet]
         public JsonResult CreateNewCategory()
         {
             string categoryName = "ll";
@@ -56,7 +56,7 @@ namespace ShoppingCart.Web.Controllers
             return Json(categoryName, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
+        [HttpPost, HttpGet]
         public JsonResult CreateNewCategory(string hu)
         {
             string categoryName = hu;
@@ -67,5 +67,13 @@ namespace ShoppingCart.Web.Controllers
             }
             return Json(categoryName, JsonRequestBehavior.AllowGet);
         }
+
+
+        //[HttpPost]
+        //public JsonResult AddData(string ListID, string ItemName)
+        //{
+        //    //return Content(ListID + " " + ItemName);
+        //    return Json(ItemName, JsonRequestBehavior.AllowGet);
+        //}
     }
 }

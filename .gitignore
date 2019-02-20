@@ -328,3 +328,5 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+/ShoppingCart.Web/ExcelImport/2019-02
+/ShoppingCart.Web/OrderImport/2019-02

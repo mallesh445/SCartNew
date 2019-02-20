@@ -5,7 +5,9 @@
 }
 
 <h2>Add Category</h2>
-
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+</head>
 
 <div class="panel-body">
 
@@ -24,7 +26,7 @@
                         @*<div class="label-wrapper"><label class="control-label" for="Name">Name</label><div title="The category's name." data-toggle="tooltip" class="ico-help"><i class="fa fa-question-circle"></i></div></div>*@
                     </div>
                     <div class="col-md-6">
-                        <input class="form-control text-box single-line" id="newcategoryName" name="newcategoryName" type="text" value="">
+                        <input class="form-control text-box single-line" id="txtCategoryName" name="newcategoryName" type="text" value="">
                     </div>
                 </div>
                 <div class="row" style="margin-top:5px">
@@ -33,7 +35,7 @@
                     </div>
                     <div class="col-md-6">
                         @*@Ajax.ActionLink("Create", "",)*@
-                        <input type="submit" id="btnCatSubmit" value="Create" class="btn btn-success" style="width:30%" />
+                        <input type="submit" id="btnCategorySubmit" value="Create" class="btn btn-success" style="width:30%" />
                     </div>
                 </div>
                 @*@using (Html.BeginForm())
@@ -84,73 +86,34 @@
 </div>
 
 @*<input type="submit" id="btnSubmict" value="Add Category" />*@
-
-@section Scripts
-{
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-            $('#btnCatSubmit').click(function () {
-                //event.preventDefault();
-                var categoryName = $('#newcategoryName').val();
-                var categoryData = {
-                    categoryName: categoryName
-                };
-                $.ajax({
-                        type: "POST",
-                        url: "Catelog/CreateNewCategory",
-                        //url: '@Url.Action("CreateNewCategory", "Catelog")',
-                        //data: JSON.parse('{ "name":"John", "age":30, "city":"New York"}'),
-                        //data: categoryData,
-                        data: "{}",
-                        dataType: "application/json",
-                        //dataType: "json",
-                        contentType: 'application/json; charset=utf-8',
-                        success: function (data) {
-                            alert(data.msg);
-                        },
-                        failure: function (response) {
-                            alert(response.responseText);
-                        },
-                        error: function (jqXHR, exception) {
-                            var msg = '';
-                            if (jqXHR.status === 0) {
-                                msg = 'Not connect.\n Verify Network.';
-                            } else if (jqXHR.status == 404) {
-                                msg = 'Requested page not found. [404]';
-                            } else if (jqXHR.status == 500) {
-                                msg = 'Internal Server Error [500].';
-                            } else if (exception === 'parsererror') {
-                                msg = 'Requested JSON parse failed.';
-                            } else if (exception === 'timeout') {
-                                msg = 'Time out error.';
-                            } else if (exception === 'abort') {
-                                msg = 'Ajax request aborted.';
-                            } else {
-                                msg = 'Uncaught Error.\n' + jqXHR.responseText;
-                            }
-                            alert("Error occured! " + msg)
-                        }
-                    });
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnCategorySubmit').click(function () {
+            var category = { CategoryName: $('#txtCategoryName').val() };
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Category/Create",
+                // data: { ListID: '1', ItemName: 'test' },
+                data: JSON.stringify(category),
+                //dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (response) { alert('Success'); },
+                error: function (xhr, ajaxOptions, thrownError) { alert(xhr.responseText); }
             });
         });
-    </script>
 
-}
-@*@using (Html.BeginForm())
-    {
-           @Html.AntiForgeryToken()
-
-       @Html.TextBox("CategoryName")
-        <br/>
-        <input type="file" name="image"  />
-         <input type="submit" value="Create" class="btn btn-default" />
-    }*@
-
+        //$('#btnAjaxCall').click(function () {
+        //    var categoryName = { categoryName : $('#txtCategoryName').val() };
+        //    $.ajax({
+        //        type: "POST",
+        //        url: "/Admin/Category/CreateNewCategory",
+        //        data: JSON.stringify(categoryName),
+        //        //dataType: "json",
+        //        contentType: "application/json; charset=utf-8",
+        //        success: function (response) { alert(response); },
+        //        error: function (xhr, ajaxOptions, thrownError) { alert(xhr.responseText); }
+        //    });
+        //});
+    });
+</script>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using ShoppingCart.Utilities.ExcelModel;
 
 namespace ShoppingCart.Web.BO
 {
@@ -49,7 +50,7 @@ namespace ShoppingCart.Web.BO
                     qry = qry.Where(cat => cat.CategoryName == categoryName);
                 return q.ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -88,6 +89,32 @@ namespace ShoppingCart.Web.BO
             {
                 Category objCategory = context.Categories.Find(categoryId);
                 context.Categories.Remove(objCategory);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        /// <summary>
+        /// Insertign bulk category records
+        /// </summary>
+        /// <param name="records"></param>
+        internal void InsertCategoryInBulk(List<CategoryImportExcel> records)
+        {
+            try
+            {
+                IList<Category> categoriesList = new List<Category>();
+                foreach (var item in records)
+                {
+                    Category categoryExcel = new Category();
+                    categoryExcel.CreatedDate = DateTime.Now;
+                    categoryExcel.CategoryName = item.CategoryName;
+                    categoryExcel.FKCreatedByUserId = int.Parse(item.CreatedByUser);
+                    categoriesList.Add(categoryExcel);
+                }
+                context.Categories.AddRange(categoriesList);
                 context.SaveChanges();
             }
             catch (Exception ex)
