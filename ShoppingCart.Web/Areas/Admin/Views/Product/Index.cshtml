@@ -23,12 +23,42 @@
     <div class="panel-body">
         @using (Html.BeginForm())
         {
-            @Html.Label("Category:")
-            @Html.DropDownList("Category", ViewBag.Category as SelectList, "Select Category")
-            @Html.Label("SubCategory:")
+            <div class="col-md-12">
+                <div class="form-group col-6">
+                    @Html.Label("Category:", new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        <div class="editor-field">
+                            @Html.DropDownList("Category", ViewBag.Category as SelectList, new { @class = "form-control width=80%" })
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    @Html.Label("SubCategory:", new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        <div class="editor-field">
+                            @Html.DropDownList("SubCategory", ViewBag.SubCategory as SelectList, new { @class = "form-control width=80%" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*@Html.Label("SubCategory:")
             @Html.DropDownList("SubCategory", ViewBag.SubCategory as SelectList, "Select SubCategory")
             <input type="submit" name="btnSearch" value="Search" class="btn btn-sm btn-primary" />
-            <input type="submit" name="btnReset" value="Reset" class="btn btn-sm btn-primary" />
+            <input type="submit" name="btnReset" value="Reset" class="btn btn-sm btn-primary" />*@
+            <div class="form-group">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4">
+                        <input type="submit" name="btnSearch" value="Search" class="btn btn-sm btn-primary form-control">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="submit" name="btnReset" value="Reset" class="btn btn-sm btn-primary form-control">
+                    </div>
+
+                </div>
+            </div>
         }
     </div>
 
@@ -159,7 +189,6 @@
                 "info": true,
                 "paging": true,
                 "fnInitComplete": function () {
-
                     $("#adminProductsTable").css("width", "100%");
                 }
             });
@@ -171,17 +200,30 @@
                     $.ajax({
                         url: "Product/GetSubCategories",
                         data: { id: id },
-                        type: "GET"
-                    }).success(function (data) {
+                        type: "GET",
+                        success: function (data) {
+                            $("#SubCategory").empty();
+                            $.each(data, function (key, value) {
+                                $("#SubCategory").append($("<option></option>").val(value.PKSubCategoryId).html(value.SubCategoryName));
+                            });
 
-                        $("#SubCategory").empty();
-                        $.each(data, function (key, value) {
-                            $("#SubCategory").append($("<option></option>").val(value.PKSubCategoryId).html(value.SubCategoryName));
-                        });
-                    })
+                        }
+                    });
+                    //}).success(function (data) {
+
+                    //    $("#SubCategory").empty();
+                    //    $.each(data, function (key, value) {
+                    //        $("#SubCategory").append($("<option></option>").val(value.PKSubCategoryId).html(value.SubCategoryName));
+                    //    });
+                    //})
                 }
             })
             $('#Category').trigger('change');
         })
     </script>
+    <style>
+        .form-control {
+            width: 40% !important;
+        }
+    </style>
 }

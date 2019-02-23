@@ -25,25 +25,27 @@
             @Html.HiddenFor(model => model.PKCategoryId)
             @Html.HiddenFor(model => model.CreatedDate)
             @Html.HiddenFor(model => model.FKCreatedByUserId)
-            <div class="form-group">
+            <div class="form-group ">
                 @Html.LabelFor(model => model.CategoryName, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.CategoryName)
-                    @Html.ValidationMessageFor(model => model.CategoryName)
+                    @*@Html.EditorFor(model => model.CategoryName, new { @class = "form-control text-box single-line" })*@
+                    @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control  offset-2" } })
+                    @Html.ValidationMessageFor(model => model.CategoryName,"", new { @class = "text-danger"})
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.IsActive, new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.IsActive)
+                    @*@Html.EditorFor(model => model.IsActive, new { @class = "form-control text-box single-line" })*@
+                    @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class="form-control" } })
                     @Html.ValidationMessageFor(model => model.IsActive)
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Update" class="btn btn-success" />
                 </div>
             </div>
         </div>
@@ -51,3 +53,8 @@
 
     @Html.ActionLink("Back to List", "Index")
 </div>
+<style>
+    .form-control {
+        width: 50% !important;
+    }
+</style>

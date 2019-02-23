@@ -90,17 +90,22 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#btnCategorySubmit').click(function () {
-            var category = { CategoryName: $('#txtCategoryName').val() };
-            $.ajax({
-                type: "POST",
-                url: "/Admin/Category/Create",
-                // data: { ListID: '1', ItemName: 'test' },
-                data: JSON.stringify(category),
-                //dataType: "json",
-                contentType: "application/json; charset=utf-8",
-                success: function (response) { alert('Success'); },
-                error: function (xhr, ajaxOptions, thrownError) { alert(xhr.responseText); }
-            });
+            if ($('#txtCategoryName').val() === '') {
+                alert('Enter Category Name');
+            }
+            else {
+                var category = { CategoryName: $('#txtCategoryName').val() };
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/Category/Create",
+                    // data: { ListID: '1', ItemName: 'test' },
+                    data: JSON.stringify(category),
+                    //dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (response) { alert('Success'); },
+                    error: function (xhr, ajaxOptions, thrownError) { alert(xhr.responseText); }
+                });
+            }
         });
 
         //$('#btnAjaxCall').click(function () {
