@@ -15,7 +15,7 @@ using ShoppingCart.Web.BO;
 
 namespace ShoppingCart.Web.Areas.Admin.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class CategoryController : Controller
     {
         CategoryBO objCategoryBO = new CategoryBO();
