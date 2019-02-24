@@ -51,7 +51,9 @@
 </div>
 <div>
     <h3>Featured Products</h3>
-    @Html.Partial("ProductsPartailview")
+    @Html.Partial("ProductsPartailview");
+    @Html.Partial("~/Views/Shared/Products/_TrendingProducts.cshtml");
+    @*@Html.Partial("~/Views/Shared/Products/_ProductsListView.cshtml");*@
 </div>
 @section Scripts{
     <script src="~/Scripts/jquery.elevatezoom.js"></script>
@@ -71,10 +73,10 @@
         $(document).ready(function () {
             $('.loader').show();
         });
-                        // $('#listItem0').click(function () {
-                        //     alert("Hi");
-                        //});
+                                // $('#listItem0').click(function () {
+                                //     alert("Hi");
+                                //});
 
-                        //$('#Password').addClass('form-control');
+                                //$('#Password').addClass('form-control');
     </script>
 }

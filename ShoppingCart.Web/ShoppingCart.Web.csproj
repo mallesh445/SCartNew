@@ -172,6 +172,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CategoriesPartialView.css" />
     <Content Include="Content\CommonTableStyles.css" />
     <Content Include="Content\css\jquery.dataTables.css" />
     <Content Include="Content\css\jquery.dataTables.min.css" />
@@ -219,6 +220,7 @@
     <Content Include="Content\Datatables\jquery.dataTables_themeroller.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\HeaderLayoutStyles.css" />
     <Content Include="Content\images\back_disabled.png" />
     <Content Include="Content\images\back_enabled.png" />
     <Content Include="Content\images\back_enabled_hover.png" />
@@ -391,6 +393,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -469,6 +472,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\Home\Index1.cshtml" />
+    <Content Include="Views\Shared\_HeaderLayout.cshtml" />
+    <Content Include="Views\Shared\_CategoriesPvLayout.cshtml" />
+    <Content Include="Views\Shared\Products\_TrendingProducts.cshtml" />
+    <Content Include="Views\Shared\Products\_ProductsListView.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -706,6 +713,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="fonts\" />
+    <Folder Include="Views\Shared\Category\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

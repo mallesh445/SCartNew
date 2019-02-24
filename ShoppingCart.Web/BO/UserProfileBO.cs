@@ -8,6 +8,7 @@ namespace ShoppingCart.Web.BO
 {
     public class UserProfileBO
     {
+        Utilities.EncryptAndDecyptEngine encryptAndDecyptEngine = new Utilities.EncryptAndDecyptEngine();
         ShoppingStoreEntities context = new ShoppingStoreEntities();
         public UserProfile GetUser(int userId)
         {
@@ -18,6 +19,10 @@ namespace ShoppingCart.Web.BO
             try
             {
                 UserProfile objUserProfile = context.UserProfiles.Where(u => u.UserName == userName).SingleOrDefault();
+                if (objUserProfile!=null && !string.IsNullOrWhiteSpace(objUserProfile.Password))
+                {
+                    objUserProfile.Password = encryptAndDecyptEngine.DecryptText(objUserProfile.Password, "MySecurityKey0445");
+                }
                 return objUserProfile;
             }
             catch (Exception ex)
@@ -49,6 +54,7 @@ namespace ShoppingCart.Web.BO
         {
             try
             {
+                objUser.Password = encryptAndDecyptEngine.EncryptText(objUser.Password, "MySecurityKey0445");
                 objUser.CreatedDate = DateTime.Now;
                 if (!string.IsNullOrEmpty(Helper.UserData))
                     objUser.CreatedByUserId = Helper.UserId;
