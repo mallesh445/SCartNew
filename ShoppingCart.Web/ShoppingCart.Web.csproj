@@ -251,10 +251,14 @@
     <Content Include="Images\button-up-shirt-black-collar.jpg" />
     <Content Include="Images\Dell.ico" />
     <Content Include="Images\DellMini.jpg" />
+    <Content Include="Images\dinning_table.jpg" />
     <Content Include="Images\Drill.jpg" />
     <Content Include="Images\drill2.jpg" />
     <Content Include="Images\drill3.jpg" />
     <Content Include="Images\driller.jpg" />
+    <Content Include="Images\elec3.jpg" />
+    <Content Include="Images\elecronic1.jpg" />
+    <Content Include="Images\electr2.jpg" />
     <Content Include="Images\error.jpg" />
     <Content Include="Images\fastrack.jpeg" />
     <Content Include="Images\Fastrack.jpg" />
