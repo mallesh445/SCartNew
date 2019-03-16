@@ -29,27 +29,26 @@
 
         <div class="content-wrapper">
             @*<section class="content-header">
-                    <h1>
-                        @ViewBag.Title
-                        <small>@ViewBag.Description</small>
-                    </h1>
-                </section>*@
+                <h1>
+                    @ViewBag.Title
+                    <small>@ViewBag.Description</small>
+                </h1>
+            </section>*@
 
             <section class="content">
                 @RenderBody()
             </section>
         </div>
-
+        <div>
+            <footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                    <b>Version</b> 2.4.0
+                </div>
+                <strong>Copyright © 2014-2016 <a href="https://adminlte.io">HI-FI</a>.</strong> All rights
+                reserved.
+            </footer>
+        </div>
         @Html.Partial("_ControlSidebar")
-    </div>
-    <div>
-        <footer class="main-footer">
-            <div class="pull-right hidden-xs">
-                <b>Version</b> 2.4.0
-            </div>
-            <strong>Copyright © 2014-2016 <a href="https://adminlte.io">HI-FI</a>.</strong> All rights
-            reserved.
-        </footer>
     </div>
     @*<div class="main-footer clearfix col-md-10 pull-right">
             <div class="pull-left">Powered By HiFi</div>

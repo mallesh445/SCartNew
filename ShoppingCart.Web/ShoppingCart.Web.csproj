@@ -63,6 +63,9 @@
     <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin.Security, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
@@ -407,8 +410,10 @@
     <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.bootstrap.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.bootstrap.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\MyScripts.js" />
     <Content Include="Scripts\popper-utils.js" />
@@ -444,7 +449,9 @@
       <DependentUpon>ShoppingCartDatabaseModel.edmx</DependentUpon>
       <LastGenOutput>ShoppingCartDatabaseModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
@@ -456,9 +463,9 @@
     <Content Include="ShoppingCartDatabaseModel.edmx.diagram">
       <DependentUpon>ShoppingCartDatabaseModel.edmx</DependentUpon>
     </Content>
-    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\LoginOld.cshtml" />
     <Content Include="Views\Account\ManageUserProfile.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\RegisterMine.cshtml" />
     <Content Include="Views\Catelog\GetProductDetails.cshtml" />
     <Content Include="Views\Catelog\GetProductImages.cshtml" />
     <Content Include="Views\Catelog\GetProducts.cshtml" />
@@ -480,6 +487,9 @@
     <Content Include="Views\Shared\_CategoriesPvLayout.cshtml" />
     <Content Include="Views\Shared\Products\_TrendingProducts.cshtml" />
     <Content Include="Views\Shared\Products\_ProductsListView.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\MyProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -538,6 +548,24 @@
       <DependentUpon>ShoppingCartDatabaseModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
+    <Compile Include="IdentityMigrations\201903101505251_Intial.cs" />
+    <Compile Include="IdentityMigrations\201903101505251_Intial.Designer.cs">
+      <DependentUpon>201903101505251_Intial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityMigrations\Configuration.cs" />
+    <Compile Include="Identity\ApplicationDbContext.cs" />
+    <Compile Include="Identity\ApplicationUser.cs" />
+    <Compile Include="Identity\ApplicationUserManager.cs" />
+    <Compile Include="Identity\ApplicationUserStore.cs" />
+    <Compile Include="Migrations\201812121721306_Initial.cs" />
+    <Compile Include="Migrations\201812121721306_Initial.Designer.cs">
+      <DependentUpon>201812121721306_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812121725553_CountryColumn.cs" />
+    <Compile Include="Migrations\201812121725553_CountryColumn.Designer.cs">
+      <DependentUpon>201812121725553_CountryColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BillingAddressVal.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\OrderVal.cs" />
@@ -579,6 +607,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ShoppingCartDatabaseModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Startup.cs" />
     <Compile Include="SubCategory.cs">
       <DependentUpon>ShoppingCartDatabaseModel.tt</DependentUpon>
     </Compile>
@@ -588,6 +617,8 @@
     <Compile Include="UserProfile.cs">
       <DependentUpon>ShoppingCartDatabaseModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\LoginViewModelNew.cs" />
+    <Compile Include="ViewModel\RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -731,6 +762,17 @@
       <Project>{C7C24B24-9132-4AC0-8C0C-8E5221EA774B}</Project>
       <Name>ShoppingCart.Utilities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="IdentityMigrations\201903101505251_Intial.resx">
+      <DependentUpon>201903101505251_Intial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812121721306_Initial.resx">
+      <DependentUpon>201812121721306_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812121725553_CountryColumn.resx">
+      <DependentUpon>201812121725553_CountryColumn.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -29,6 +29,38 @@ namespace ShoppingCart.Web
             {
                 return;
             }
+            var httpException = exception as HttpException;
+
+            var routeData = new RouteData();
+
+            routeData.Values.Add("controller", "Error");
+
+            if (httpException == null)
+            {
+                routeData.Values.Add("action", "Index");
+            }
+            else
+            {
+                // It's an Http Exception, Let's handle it.
+                switch (httpException.GetHttpCode())
+                {
+                    case 404:
+                        // Page not found.
+                        routeData.Values.Add("action", "Index");
+                        break;
+                    case 401:
+                        // Page not found.
+                        routeData.Values.Add("action", "Index");
+                        break;
+                    case 500:
+                        // Server error.
+                        routeData.Values.Add("action", "Index");
+                        break;
+                    default:
+                        routeData.Values.Add("action", "Index");
+                        break;
+                }
+            }
 
             ExecuteErrorController(httpContext, exception as HttpException);
         }

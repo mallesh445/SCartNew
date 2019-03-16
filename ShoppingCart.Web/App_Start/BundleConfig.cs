@@ -35,6 +35,9 @@ namespace ShoppingCart.Web.App_Start
                 .Include("~/Content/js/plugins/inputmask/jquery.inputmask.bundle.js")
                 .Include("~/Content/js/adminlte.js")
                 .Include("~/Content/js/init.js")
+                .Include("~/Content/js/plugins/validator/validator.min.js")
+                //.Include("~/Scripts/jquery.jquery.validate.min.js")
+                //.Include("~/Scripts/jquery.validate.unobtrusive.min.js")
                 .Include("~/Scripts/jquery.unobtrusive-ajax.min.js")
                 .Include("~/Scripts/jquery.dataTables.min.js")
                 .Include("~/Scripts/dataTables.bootstrap4.min.js")
@@ -58,8 +61,8 @@ namespace ShoppingCart.Web.App_Start
             //            "~/Scripts/MyScripts.js"));
             //// Use the development version of Modernizr to develop with and learn from. Then, when you're
             //// ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            //bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-            //            "~/Scripts/modernizr-*"));
+            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                        "~/Scripts/modernizr-*"));
 
             //bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
             //          "~/Scripts/bootstrap.js",

@@ -73,36 +73,34 @@
                             </a>
                         </li>
 
-                        @if (Request.IsAuthenticated)
+                        @if (User.Identity.IsAuthenticated == true)
                         {
                             <li>@Html.ActionLink("MyOrders", "GetOrderDetails", "MyOrder")</li>
                             <li>
-                                @Html.ActionLink("Hello " + Helper.UserName + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
-                                @*@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })*@
+                                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "MyProfile", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
                             </li>
-                            <li>@Html.ActionLink("LogOut", "SignOut", "Account")</li>
+                            <li>@Html.ActionLink("LogOut", "Logout", "Account")</li>
                         }
-                        else
+                        @if (User.Identity.IsAuthenticated == false)
                         {
                             <li>@Html.ActionLink("Login", "Login", "Account")</li>
                             <li>@Html.ActionLink("Create Account", "Register", "Account")</li>
                         }
-                        @*<li>
-                                <a href="login.html">Login</a>
-                            </li>
-                            <li>
-                                <a href="register.html">Create Account</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="wishlist.html">Wishlist (5)</a>
-                            </li>
-                            <li>
-                                <a href="cart.html">My Cart</a>
-                            </li>
-                            <li>
-                                <a href="checkout.html">Checkout</a>
-                            </li>*@
+                        @*@if (Request.IsAuthenticated)
+        {
+            <li>@Html.ActionLink("MyOrders", "GetOrderDetails", "MyOrder")</li>
+            <li>
+                @Html.ActionLink("Hello " + Helper.UserName + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li>@Html.ActionLink("LogOut", "Logout", "Account")</li>
+        }
+        else
+        {
+            <li>@Html.ActionLink("Login", "Login", "Account")</li>
+            <li>@Html.ActionLink("Create Account", "Register", "Account")</li>
+        }*@
+
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -158,6 +156,12 @@
                 </li>
             </ul>
         </div>
+        @if (User.Identity.IsAuthenticated == true)
+        {
+            <div class="text-white">
+                Welcome to, @User.Identity.Name
+            </div>
+        }
     </nav><!--=========-TOP_BAR============-->
     <!--=========MIDDEL-TOP_BAR============-->
 

@@ -37,13 +37,28 @@ namespace ShoppingCart.Web
             }
 
         }
-        public static string UserName
+        public static string UserNameOld
         {
             get
             {
                 if (UserData != null && UserData != "")
                 {
                     return UserData.Split('^')[3];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public static string UserName
+        {
+            get
+            {
+                if (UserData != null && UserData != "")
+                {
+                    return UserData;
                 }
                 else
                 {
