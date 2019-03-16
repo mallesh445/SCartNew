@@ -103,7 +103,7 @@ namespace ShoppingCart.Web.Controllers
                 var userStore = new ApplicationUserStore(appDbContext);
                 var userManager = new ApplicationUserManager(userStore);
                 var user = userManager.Find(lvm.Username, lvm.Password);
-                //var a = appDbContext.Roles.Where(q => q.Id == user.Roles.Select(a=>a.RoleId));
+                //var a = appDbContext.Roles.Where(q => q.Id == user.Roles.Select(a=>a.RoleId));//linq
                 #region Just tried to add not required
                 //var uRole = user.Roles.Select(y => y.RoleId).ToList();
                 //string myrole = uRole[0].ToString();
