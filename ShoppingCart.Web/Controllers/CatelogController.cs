@@ -32,6 +32,16 @@ namespace ShoppingCart.Web.Controllers
             ViewBag.SubCategoryId = subCategoryId;
             return View(objProductBO.GetProducts(categoryId,subCategoryId));
         }
+
+        public ActionResult GetAllProducts(int categoryId=0, string categoryName="", int subCategoryId=0, string subCategoryName="")
+        {
+            ViewBag.CategoryName = categoryName;
+            ViewBag.CategoryId = categoryId;
+            ViewBag.SubCategoryName = subCategoryName;
+            ViewBag.SubCategoryId = subCategoryId;
+            return View(objProductBO.GetProducts(categoryId, subCategoryId));
+            //return PartialView("ProductsPartailView");
+        }
         public ActionResult GetProductImages(int productId)
         {
             ViewBag.ProductId = productId;
@@ -68,6 +78,10 @@ namespace ShoppingCart.Web.Controllers
             return Json(categoryName, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult ProductDetailsView()
+        {
+            return View();
+        }
 
         //[HttpPost]
         //public JsonResult AddData(string ListID, string ItemName)

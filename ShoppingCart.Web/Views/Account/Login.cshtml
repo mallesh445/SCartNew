@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/UserLayout.cshtml";
+    //Layout = "~/Views/Shared/UserLayout.cshtml";
 }
 <head>
     @Scripts.Render("~/Scripts/jquery.validate.min.js")
@@ -12,23 +12,80 @@
     @{Html.EnableUnobtrusiveJavaScript(true);}
 </head>
 
-<h2>Login</h2>
+@*<h2>Login</h2>*@
 @using (Html.BeginForm("Login", "Account", FormMethod.Post))
 {
-    <div class="form-row mx-auto">
-        <div class="form-group col-md-12">
-            @Html.LabelFor(temp => temp.Username)
-            @Html.TextBoxFor(temp => temp.Username, new { placeholder = "Username", @class = "form-control" })
-            @Html.ValidationMessageFor(temp => temp.Username)
-        </div>
-        <div class="form-group col-md-12">
-            @Html.LabelFor(temp => temp.Password)
-            @Html.PasswordFor(temp => temp.Password, new { placeholder = "Password", @class = "form-control" })
-            @Html.ValidationMessageFor(temp => temp.Password)
-        </div>
+    <div id="mainBody">
+        <div class="container">
+            <div class="row">
+                <div class="span9">
+                    <ul class="breadcrumb">
+                        <li><a href="/Home/Index">Home</a> <span class="divider">/</span></li>
+                        <li class="active">Login</li>
+                    </ul>
+                    <h3> Login</h3>
+                    <hr class="soft" />
 
-        @Html.ValidationSummary()
+                    <div class="row">
+                        <div class="span1"> &nbsp;</div>
+                        <div class="span4">
+                            <div class="well">
+                                <h5>LOGIN HERE</h5>
+                                <form>
+                                    <div class="control-group">
+                                        @Html.LabelFor(temp => temp.Username, new { @class = "control-label" })
+                                        <div class="controls">
+                                            @Html.TextBoxFor(temp => temp.Username, new { placeholder = "Username", @class = "span3" })
+                                            @Html.ValidationMessageFor(temp => temp.Username)
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        @Html.LabelFor(temp => temp.Password, new { @class = "control-label" })
+                                        <div class="controls">
+                                            @Html.PasswordFor(temp => temp.Password, new { placeholder = "Password", @class = "span3" })
+                                            @Html.ValidationMessageFor(temp => temp.Password)
+                                        </div>
+                                    </div>
+                                    @Html.ValidationSummary()
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button type="submit" class="btn">Login</button> <a href="#">Forget password?</a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="span2"> 
+                            <div class="span2" style="padding:100px 100px">
+                                ( OR )                  <a class="btn btn-success" href="/Account/Register">Register Here</a>
+                            </div>
+                        </div>
+                    </div>
 
-        <button type="submit" class="btn btn-success">Login</button>
+                </div>
+            </div>
+            <div>
+                <a class="btn btn-info" href="/">Back</a>
+            </div>
+        </div>
     </div>
 }
+@*@using (Html.BeginForm("Login", "Account", FormMethod.Post))
+    {
+        <div class="form-row mx-auto">
+            <div class="form-group col-md-12">
+                @Html.LabelFor(temp => temp.Username)
+                @Html.TextBoxFor(temp => temp.Username, new { placeholder = "Username", @class = "form-control" })
+                @Html.ValidationMessageFor(temp => temp.Username)
+            </div>
+            <div class="form-group col-md-12">
+                @Html.LabelFor(temp => temp.Password)
+                @Html.PasswordFor(temp => temp.Password, new { placeholder = "Password", @class = "form-control" })
+                @Html.ValidationMessageFor(temp => temp.Password)
+            </div>
+
+            @Html.ValidationSummary()
+
+            <button type="submit" class="btn btn-success">Login</button>
+        </div>
+    }*@

@@ -120,7 +120,7 @@ namespace ShoppingCart.Web.Controllers
                     authenticationManager.SignIn(new AuthenticationProperties(), userIdentity); 
                     if (userManager.IsInRole(user.Id, "admin"))
                     {
-                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                        return RedirectToAction("Index", "Default", new { area = "Admin" });
 
                     }
                     else
@@ -190,6 +190,13 @@ namespace ShoppingCart.Web.Controllers
                 ModelState.AddModelError("My Error", "Invalid data");
                 return View();
             }
+        }
+
+        protected override void HandleUnknownAction(string actionName)
+        {
+            RedirectToAction("NotFound", "Error").ExecuteResult(this.ControllerContext);
+            //RedirectToAction("Index").ExecuteResult(this.ControllerContext);
+            //base.HandleUnknownAction(actionName);
         }
 
         [HttpPost]

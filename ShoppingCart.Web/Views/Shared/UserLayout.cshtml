@@ -38,7 +38,9 @@
     @*<script src="~/Scripts/jquery-3.3.1.js"></script>
         <script src="~/Scripts/bootstrap.js"></script>*@
     @*@Html.Partial("_NavBar")*@
-    @Html.Partial("_HeaderLayout")
+    @*@Html.Partial("_HeaderLayout")*@
+    @Html.Partial("_Header")
+    @Scripts.Render("~/bundles/jquery")
 </head>
 @{
     var id = Request.Url.Segments.Last();
